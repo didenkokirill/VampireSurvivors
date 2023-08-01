@@ -2,39 +2,27 @@ using UnityEngine;
 
 public class MovePlayer : MonoBehaviour
 {
-    [SerializeField] Rigidbody2D rigidBody;
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Camera cam;
 
     [SerializeField] private float speed;
+    [SerializeField] private Vector2 mousePos;
 
-    [SerializeField] private KeyCode up;
-    [SerializeField] private KeyCode down;
-    [SerializeField] private KeyCode left;
-    [SerializeField] private KeyCode right;
+    private Vector2 directionMove;
 
     private void Update()
     {
-        Vector2 direction = Vector2.zero;
+        directionMove.x = Input.GetAxisRaw("Horizontal");
+        directionMove.y = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKey(up))
-        {
-            direction += Vector2.up;
-        }
+        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+    }
+    private void FixedUpdate()
+    {
+        rb.MovePosition(rb.position + directionMove * speed * Time.deltaTime);
 
-        if (Input.GetKey(down))
-        {
-            direction += Vector2.down;
-        }
-
-        if (Input.GetKey(left))
-        {
-            direction += Vector2.left;
-        }
-
-        if (Input.GetKey(right))
-        {
-            direction += Vector2.right;
-        }
-
-        rigidBody.velocity = direction * speed;
+        Vector2 lookDir = mousePos - rb.position;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
+        rb.rotation = angle;
     }
 }

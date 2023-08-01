@@ -17,11 +17,11 @@ public class HpCount : MonoBehaviour
         hpText.text = hpCount.ToString();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            hpCount -= 5;
+            hpCount -= 1;
         }
     }
 }
