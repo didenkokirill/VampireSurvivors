@@ -6,7 +6,7 @@ public class MoveEnemy : MonoBehaviour
     public float speed = 1.0f;
 
     // The target (cylinder) position.
-    [SerializeField] private Transform target;
+    public Transform target;
 
     void Awake()
     {
