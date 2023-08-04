@@ -2,20 +2,28 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-    [SerializeField] private float attackDelay = 5;
-    [SerializeField] private GameObject bullet;
-    [SerializeField] private float forse;
     [SerializeField] private Transform firePoint;
+    [SerializeField] private GameObject bullet;
+
+    [SerializeField] private float attackDelay = 5;
+    [SerializeField] public float range = 10;
+    [SerializeField] private float forse;
+    
     
     private float attackTimer;
 
     private void Update()
     {
+        GameObject nearestTarget = GetComponentInParent<FindNearest>().nearest;
+
         attackTimer++;
         if (attackTimer > attackDelay)
         {
-            attackTimer = 0;
-            Shoot();
+            if (Vector3.Distance(transform.position, nearestTarget.transform.position) <= range)
+            {
+                attackTimer = 0;
+                Shoot();
+            }          
         }
     }
 

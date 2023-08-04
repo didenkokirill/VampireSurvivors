@@ -10,7 +10,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Transform target;
     private float timer;
 
-    private void Update()
+    private void FixedUpdate()
     {
         timer -= Time.deltaTime;
         if (timer <= 0f)
