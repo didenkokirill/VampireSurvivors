@@ -15,6 +15,8 @@ public class MovePlayer : MonoBehaviour
     {
         directionMove.x = Input.GetAxisRaw("Horizontal");
         directionMove.y = Input.GetAxisRaw("Vertical");
+
+
     }
     private void FixedUpdate()
     {
@@ -27,7 +29,6 @@ public class MovePlayer : MonoBehaviour
             float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
             rb.rotation = angle;
         }    
-
         rb.MovePosition(rb.position + directionMove * speed * Time.deltaTime);   
     }
 }

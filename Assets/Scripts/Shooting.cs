@@ -2,15 +2,20 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-    [SerializeField] private Transform firePoint;
+    [SerializeField] private Transform[] firePoints;
     [SerializeField] private GameObject bullet;
 
+    [SerializeField] private int weaponNum;
+
     [SerializeField] private float attackDelay = 5;
-    [SerializeField] public float range = 10;
-    [SerializeField] private float forse;
-    
-    
+    [SerializeField] private float attackRange = 10;
+    [SerializeField] private float bulletForse = 30;
+    [SerializeField] private float bulletDamage = 1;
+    [SerializeField] private float explosiveDamage = 1;
+    [SerializeField] private float explosionRange = 0;
+
     private float attackTimer;
+    
 
     private void Update()
     {
@@ -19,18 +24,56 @@ public class Shooting : MonoBehaviour
         attackTimer++;
         if (attackTimer > attackDelay)
         {
-            if (Vector3.Distance(transform.position, nearestTarget.transform.position) <= range)
+            if(nearestTarget != null)
             {
-                attackTimer = 0;
-                Shoot();
-            }          
+
+                if (Vector3.Distance(transform.position, nearestTarget.transform.position) <= attackRange)
+                {
+                    if (weaponNum == 1)
+                    {
+                        MachineGunShoot();
+                    }
+                    if (weaponNum == 2)
+                    {
+                        ShotGunShoot();
+                    }
+                    if(weaponNum == 3)
+                    {
+                        RocketLauncherShoot();
+                    }
+
+                    attackTimer = 0;
+                }
+            }
+            
         }
     }
 
-    public void Shoot()
+    private void MachineGunShoot()
     {      
-        GameObject clone = Instantiate(bullet, transform.position, transform.rotation);
+        GameObject clone = Instantiate(bullet, firePoints[0].transform.position, firePoints[0].transform.rotation);
         Rigidbody2D rb = clone.GetComponent<Rigidbody2D>();
-        rb.AddForce(firePoint.up * forse, ForceMode2D.Impulse);
+        clone.GetComponent<Bullet>().damage = bulletDamage;
+        rb.AddForce(firePoints[0].up * bulletForse, ForceMode2D.Impulse);
+    }
+
+    private void ShotGunShoot()
+    {
+        for (var i = 0; i < firePoints.Length; i++)
+        {
+            GameObject clone = Instantiate(bullet, firePoints[i].transform.position, firePoints[i].transform.rotation);
+            clone.GetComponent<Bullet>().damage = bulletDamage;
+            Rigidbody2D rb = clone.GetComponent<Rigidbody2D>();
+            rb.AddForce(firePoints[i].up * bulletForse, ForceMode2D.Impulse);
+        }
+    }
+
+    private void RocketLauncherShoot()
+    {
+        GameObject clone = Instantiate(bullet, firePoints[0].transform.position, firePoints[0].transform.rotation);
+        clone.GetComponent<Bullet>().damage = explosiveDamage;
+        clone.GetComponent<Bullet>().explosionRange = explosionRange;
+        Rigidbody2D rb = clone.GetComponent<Rigidbody2D>();
+        rb.AddForce(firePoints[0].up * bulletForse, ForceMode2D.Impulse);
     }
 }

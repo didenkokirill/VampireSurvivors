@@ -6,7 +6,7 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject enemy;
     [SerializeField] private Vector2 spawnArea;
-    [SerializeField] private float spawnSpeed;
+    [SerializeField] private float spawnDelay;
     [SerializeField] private Transform target;
     private float timer;
 
@@ -16,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
         if (timer <= 0f)
         {
             SpawnEnemy();
-            timer = spawnSpeed; 
+            timer = spawnDelay; 
         }
     }
     private void SpawnEnemy()
