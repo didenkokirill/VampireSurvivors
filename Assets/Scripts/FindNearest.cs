@@ -7,7 +7,6 @@ public class FindNearest : MonoBehaviour
 
     [SerializeField] public GameObject nearest;
 
-
     private GameObject FindClosestEnemy()
     {
         float distance = Mathf.Infinity;
@@ -23,10 +22,12 @@ public class FindNearest : MonoBehaviour
                 distance = curDistance;
             }
         }
+
         if (target != null)
         {
             return target;
         }
+
         else
         {
             return null;

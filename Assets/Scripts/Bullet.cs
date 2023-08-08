@@ -3,7 +3,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float damage;
-    public float explosionRange;
+    public float splashRange;
 
     private void Awake()
     {
@@ -17,9 +17,9 @@ public class Bullet : MonoBehaviour
             EnemyHp enemyHp = collision.GetComponent<EnemyHp>();
             if (enemyHp != null)
             {               
-                if (explosionRange > 0)
+                if (splashRange > 0)
                 {
-                    Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, explosionRange);
+                    Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, splashRange);
                     Debug.Log(hitColliders.LongLength);
                     foreach (var hitCollider in hitColliders)
                     {
@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
                         {
                             var closestPoint = hitCollider.ClosestPoint(transform.position);
                             var distance = Vector3.Distance(closestPoint, transform.position);
-                            var damagePersent = Mathf.InverseLerp(explosionRange, 0, distance);
+                            var damagePersent = Mathf.InverseLerp(splashRange, 0, distance);
                             EnemyHp enemyHp1 = hitCollider.GetComponent<EnemyHp>();
                             enemyHp1.TakeHit(damagePersent * damage);
                         }

@@ -24,12 +24,4 @@ public class EnemyHp : MonoBehaviour
     {
         hp -= damage;
     }
-
-
-    //private void Update()
-    //{
-    //    var renderer = GetComponent<Renderer>();
-    //    var lerpedColor = Color.Lerp(Color.red, Color.white, Mathf.PingPong(Time.time, 1));
-    //    renderer.material.color = lerpedColor;
-    //}
 }

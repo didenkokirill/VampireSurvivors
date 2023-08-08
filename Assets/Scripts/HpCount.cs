@@ -23,6 +23,7 @@ public class HpCount : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             hpCount -= 1;
+
             if (hpCount <= 0)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
