@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MoveEnemy : MonoBehaviour
 {
@@ -11,7 +11,9 @@ public class MoveEnemy : MonoBehaviour
     void Awake()
     {
         // Position the cube at the origin.
-        transform.position = GetComponent<Transform>().position;
+        transform.position = GetComponent<Transform>().position; // FEEDBACK: ты здесь пишешь "масло = масло" (:
+        // transform.position это и есть GetComponent<Transform>().position
+        // можешь убрать этот кусочек кода
     }
 
     void Update()

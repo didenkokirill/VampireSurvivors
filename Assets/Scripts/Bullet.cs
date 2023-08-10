@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // FEEDBACK: очень много вложенности, смотри Update() в Shooting.cs по поводу вложенности.
         if (collision.CompareTag("Enemy"))
         {
             EnemyHp enemyHp = collision.GetComponent<EnemyHp>();
@@ -19,8 +20,10 @@ public class Bullet : MonoBehaviour
             {               
                 if (splashRange > 0)
                 {
+                    // FEEDBACK: лучше перенести это в отдельный метод типа DamageInRange(), чтобы код читался проще.
                     Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, splashRange);
-                    Debug.Log(hitColliders.LongLength);
+                    Debug.Log(hitColliders.LongLength); // FEEDBACK: убирай, если не юзаешь
+
                     foreach (var hitCollider in hitColliders)
                     {
                         if (hitCollider.CompareTag("Enemy"))
@@ -33,11 +36,11 @@ public class Bullet : MonoBehaviour
                         }
                     }
                 }
-
                 else
                 {
                     enemyHp.TakeHit(damage);
                 }
+
                 Destroy(gameObject);
             }
         }
