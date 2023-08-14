@@ -370,7 +370,7 @@ MonoBehaviour:
   - {fileID: 1573475158}
   - {fileID: 775727537}
   bulletPrefab: {fileID: 4657473768213486360, guid: 090698c846ce4b64f843738c3484dff0, type: 3}
-  findNearest: {fileID: 570853482}
+  findNearest: {fileID: 1603820910}
   splashDamage: 1
   splashRange: 0
 --- !u!1 &296663231
@@ -682,7 +682,6 @@ GameObject:
   - component: {fileID: 570853483}
   - component: {fileID: 570853484}
   - component: {fileID: 570853481}
-  - component: {fileID: 570853482}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -798,7 +797,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  rotationSensitivity: 0
   rb: {fileID: 570853475}
 --- !u!68 &570853481
 EdgeCollider2D:
@@ -844,20 +842,6 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
---- !u!114 &570853482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 570853474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac9fe1499094ff645a58f35d0046f297, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  countEnemys: {fileID: 1869421877}
-  nearest: {fileID: 0}
 --- !u!114 &570853483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1164,7 +1148,7 @@ MonoBehaviour:
   firePoints:
   - {fileID: 505028207}
   bulletPrefab: {fileID: 4657473768213486360, guid: 090698c846ce4b64f843738c3484dff0, type: 3}
-  findNearest: {fileID: 570853482}
+  findNearest: {fileID: 1603820910}
   splashDamage: 1
   splashRange: 3
 --- !u!212 &1419933780
@@ -1327,7 +1311,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_Color: {r: 0.11320752, g: 0.11161908, b: 0.11053753, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 2}
@@ -1356,7 +1340,7 @@ MonoBehaviour:
   firePoints:
   - {fileID: 1458615958}
   bulletPrefab: {fileID: 4657473768213486360, guid: 090698c846ce4b64f843738c3484dff0, type: 3}
-  findNearest: {fileID: 570853482}
+  findNearest: {fileID: 1603820910}
   splashDamage: 1
   splashRange: 0
 --- !u!1 &1512696731
@@ -1715,6 +1699,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1603820909}
+  - component: {fileID: 1603820911}
+  - component: {fileID: 1603820910}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -1740,6 +1726,34 @@ Transform:
   - {fileID: 1419933778}
   m_Father: {fileID: 570853478}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1603820910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603820908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac9fe1499094ff645a58f35d0046f297, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countEnemys: {fileID: 1869421877}
+  nearest: {fileID: 0}
+--- !u!114 &1603820911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603820908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c5396e3505f539469a584765d2ac055, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSensitivity: 0
+  rb: {fileID: 0}
 --- !u!1 &1818930074
 GameObject:
   m_ObjectHideFlags: 0
