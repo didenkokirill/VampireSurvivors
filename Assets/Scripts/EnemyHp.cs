@@ -7,11 +7,13 @@
 public class EnemyHp : MonoBehaviour
 {
     [SerializeField] private float hp;
-    private Renderer rendr; // FEEDBACK: лучше SpriteRenderer использовать. Мы ж со спрайтами будет работать
+    [SerializeField] public CountEnemies countEnemys;
+    private SpriteRenderer rendr;
+    
 
     private void Awake()
     {
-        rendr = GetComponent<Renderer>();
+        rendr = GetComponent<SpriteRenderer>();        
     }
 
     private void Update()
@@ -20,6 +22,7 @@ public class EnemyHp : MonoBehaviour
 
         if (hp <= 0)
         {
+            countEnemys.Remove(gameObject);
             Destroy(gameObject);
         }
     }

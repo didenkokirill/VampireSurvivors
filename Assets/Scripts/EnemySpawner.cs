@@ -3,16 +3,24 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject enemy;
-    [SerializeField] private GameObject spawnParticle;
-    [SerializeField] private Vector2 spawnArea;
+    [SerializeField] private float damage;
     [SerializeField] private float spawnDelay;
+    [SerializeField] private float waitToSpawn;
+
+    [SerializeField] private Vector2 spawnArea;
+
+    [SerializeField] private GameObject enemy;
+    [SerializeField] private GameObject spawnParticle;  
     [SerializeField] private Transform target;
+    [SerializeField] private CountEnemies countEnemys;
+
     private float timer;
     private GameObject spawnParticleGO;
+    
 
     private void Start()
     {
+        countEnemys = GetComponent<CountEnemies>();
         SpawnEnemy(DefinitionPositin());
     }
 
@@ -40,7 +48,7 @@ public class EnemySpawner : MonoBehaviour
         Vector3 pos = DefinitionPositin();
         spawnParticleGO = Instantiate(spawnParticle, pos, Quaternion.identity);
 
-        yield return new WaitForSeconds(2); // wait to spawn enemy
+        yield return new WaitForSeconds(waitToSpawn);
 
         Destroy(spawnParticleGO);
 
@@ -49,6 +57,10 @@ public class EnemySpawner : MonoBehaviour
     private void SpawnEnemy(Vector3 pos)
     {        
         GameObject newEnemy = Instantiate(enemy, pos, Quaternion.identity);
-        newEnemy.GetComponent<MoveEnemy>().target = target;
+        MoveEnemy moveEnemy = newEnemy.GetComponent<MoveEnemy>();
+        moveEnemy.target = target;
+        moveEnemy.damage = damage;
+        newEnemy.GetComponent<HealthSystem>().countEnemys = countEnemys;
+        countEnemys.Add(newEnemy);
     }
 }
