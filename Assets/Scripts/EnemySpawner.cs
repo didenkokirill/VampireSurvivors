@@ -12,17 +12,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject enemy;
     [SerializeField] private GameObject spawnParticle;  
     [SerializeField] private Transform target;
-    [SerializeField] private CountEnemies countEnemys;
 
     private float timer;
     private GameObject spawnParticleGO;
-    
-
-    private void Start()
-    {
-        countEnemys = GetComponent<CountEnemies>();
-        SpawnEnemy(DefinitionPositin());
-    }
 
     private void FixedUpdate()
     {
@@ -46,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
     private IEnumerator SpawnEnemyDelayed()
     {
         Vector3 pos = DefinitionPositin();
-        spawnParticleGO = Instantiate(spawnParticle, pos, Quaternion.identity);
+        GameObject spawnParticleGO = Instantiate(spawnParticle, pos, Quaternion.identity); 
 
         yield return new WaitForSeconds(waitToSpawn);
 
@@ -60,7 +52,6 @@ public class EnemySpawner : MonoBehaviour
         MoveEnemy moveEnemy = newEnemy.GetComponent<MoveEnemy>();
         moveEnemy.target = target;
         moveEnemy.damage = damage;
-        newEnemy.GetComponent<HealthSystem>().countEnemys = countEnemys;
-        countEnemys.Add(newEnemy);
+        CountEnemies.Instance.Add(newEnemy);
     }
 }

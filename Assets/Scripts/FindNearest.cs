@@ -3,15 +3,16 @@ using UnityEngine;
 
 public class FindNearest : MonoBehaviour
 {
-    [SerializeField] private CountEnemies countEnemys;
     private GameObject target;
     private List<GameObject> targets;
     public GameObject nearest;
+    public CountEnemies countEnemies;
 
     private void Awake()
     {
-        targets = countEnemys.List(); 
+        targets = countEnemies.List();
     }
+
     private GameObject FindClosestEnemy()
     {
         float distance = Mathf.Infinity;
@@ -39,6 +40,5 @@ public class FindNearest : MonoBehaviour
     private void Update()
     {
         nearest = FindClosestEnemy();
-
     }
 }

@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class CountEnemies : MonoBehaviour
 { 
+    public static CountEnemies Instance;
+
+    private void Awake() => Instance = this;
+
     [SerializeField] private List<GameObject> enemyList = new();
 
     public void Add(GameObject enemy)
@@ -21,5 +25,4 @@ public class CountEnemies : MonoBehaviour
     {
         return enemyList;
     }
-
 }

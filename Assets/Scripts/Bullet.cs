@@ -44,16 +44,27 @@ public class Bullet : MonoBehaviour
     }
     private void DamadeInRange(Collider2D[] hitColliders)
     {
-        foreach (var hitCollider in hitColliders)
+        foreach (Collider2D hitCollider in hitColliders)
         {
             if (hitCollider.CompareTag("Enemy"))
             {
                 var closestPoint = hitCollider.ClosestPoint(transform.position);
                 var distance = Vector3.Distance(closestPoint, transform.position);
                 var damagePersent = Mathf.InverseLerp(splashRange, 0, distance);
-                HealthSystem healthSystem = GetComponent<HealthSystem>(); 
+                HealthSystem healthSystem = hitCollider.GetComponent<HealthSystem>(); 
                 healthSystem.Damage(damagePersent * damage);
             }
         }
     }
+    //private IEnumerator SpawnEnemyDelayed()
+    //{
+
+    //    GameObject explosion = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+    //    explosion.transform.position = transform.position;
+    //    explosion.GetComponent<MeshRenderer>().material.color = new Color(245, 241, 0, 0.1f);
+
+    //    yield return new WaitForSeconds(waitToSpawn);
+
+    //    Destroy(explosion);
+    //}
 }

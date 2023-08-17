@@ -9,7 +9,6 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] public int maxHealt;
     [SerializeField] public float health;
     [SerializeField] private TMP_Text healthText;
-    [SerializeField] public CountEnemies countEnemys;
     private SpriteRenderer render;
 
     private void Update()
@@ -64,7 +63,8 @@ public class HealthSystem : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 break;
             case Entity.Enemy:
-                countEnemys.Remove(gameObject);
+                CountEnemies.Instance.Remove(gameObject);
+                ExperienceManager.Instance.DropExp(transform.position);
                 break;
         }
         Destroy(gameObject);
