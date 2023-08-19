@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
     [SerializeField] private Weapon weapon;
 
-    [SerializeField] private float attackDelay = 5;
+    [SerializeField] private float attackDelay = 1;
     [SerializeField] private float attackRange = 10;
     [SerializeField] private float bulletForse = 30; // FEEDBACK: Это можно потенциально в prefab пули закинуть. Но не обязательно сейчас.
     [SerializeField] private float bulletDamage = 1; // FEEDBACK: Это тоже можно потенциально в prefab пули закинуть.
@@ -19,27 +20,25 @@ public class Shooting : MonoBehaviour
     [SerializeField] private float splashDamage = 1;
     [SerializeField] private float splashRange = 0;
 
-    private float attackTimer;
-
-    private void Update()
+    private void Start()
     {
-        attackTimer++;
-        
+        StartCoroutine(Attack());
+    }
+
+    private IEnumerator Attack()
+    {
+        yield return new WaitForSeconds(attackDelay);
+
         GameObject nearestTarget = findNearest.nearest;
-      
-        if (attackTimer <= attackDelay)
-        {
-            return;
-        }
 
         if (nearestTarget == null)
         {
-            return;
+            yield return null;
         }
 
         if (Vector3.Distance(transform.position, nearestTarget.transform.position) > attackRange)
         {
-            return;
+            yield return null;
         }
 
         switch (weapon)
@@ -54,7 +53,8 @@ public class Shooting : MonoBehaviour
                 RocketLauncher();
                 break;
         }
-        attackTimer = 0;
+        
+        StartCoroutine(Attack());
     }
 
     private void Pistol()
