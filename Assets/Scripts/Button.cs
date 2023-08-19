@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Button : MonoBehaviour
 {
@@ -24,5 +25,10 @@ public class Button : MonoBehaviour
         shotgun.SetActive(false);
         rocketLauncer.SetActive(true);
         MenuManager.Instance.CloseUpdateMenu();
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

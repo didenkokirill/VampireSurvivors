@@ -60,14 +60,15 @@ public class HealthSystem : MonoBehaviour
         switch (entity)
         {
             case Entity.Player:
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                MenuManager.Instance.OpenGameOverMenu();
+                gameObject.SetActive(false);
                 break;
             case Entity.Enemy:
                 CountEnemies.Instance.Remove(gameObject);
                 ExperienceManager.Instance.DropExp(transform.position);
+                Destroy(gameObject);
                 break;
         }
-        Destroy(gameObject);
     }
     public void ChangeMaxHealth(int amount)
     {

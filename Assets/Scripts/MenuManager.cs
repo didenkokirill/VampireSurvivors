@@ -6,7 +6,7 @@ public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance;
 
-    [SerializeField] private GameObject updateMenu;
+    [SerializeField] private GameObject updateMenu, gameOverMenu;
     [SerializeField] private float timeToResume;
     [SerializeField] private TMP_Text timerResume;
 
@@ -30,10 +30,9 @@ public class MenuManager : MonoBehaviour
     {
         onPause = true;
     }
-
     public void RemoveFromPause()
     {
-        onPause = false;
+        StartCoroutine(CountDown(timeToResume));
     }
 
     public void OpenUpdateMenu()
@@ -41,10 +40,33 @@ public class MenuManager : MonoBehaviour
         updateMenu.SetActive(true);
         PutOnPause();
     }
-
     public void CloseUpdateMenu()
     {
         updateMenu.SetActive(false);
         RemoveFromPause();
+    }
+
+    public void OpenGameOverMenu()
+    {
+        ScoreManager.Instance.UpdateScoresTexts();
+        gameOverMenu.SetActive(true);
+        PutOnPause();
+    }
+
+    private IEnumerator CountDown(float time) // check code stile
+    {
+        while (true)
+        {
+            timerResume.text = Mathf.Round(time).ToString();
+            time--;
+            yield return new WaitForSecondsRealtime(1);
+
+            if (time <= 0)
+            {
+                timerResume.enabled = false;
+                onPause = false;
+                yield return null;
+            }
+        }
     }
 }

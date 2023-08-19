@@ -48,7 +48,7 @@ public class Bullet : MonoBehaviour
         {
             if (hitCollider.CompareTag("Enemy"))
             {
-                var closestPoint = hitCollider.ClosestPoint(transform.position);
+                var closestPoint = hitCollider.ClosestPoint(transform.position); //bag?
                 var distance = Vector3.Distance(closestPoint, transform.position);
                 var damagePersent = Mathf.InverseLerp(splashRange, 0, distance);
                 HealthSystem healthSystem = hitCollider.GetComponent<HealthSystem>(); 

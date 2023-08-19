@@ -69,6 +69,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("ResetCord"))
+        {
+            transform.position = new Vector3(0, 0, 0);
+        }
+    }
+
     private void RessurectPlayer()
     {
         return;
