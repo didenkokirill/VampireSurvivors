@@ -9,6 +9,7 @@ public class Experience : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             ExperienceManager.Instance.AddExp(value);
+            value = 0;
             Destroy(gameObject);
         }
     }

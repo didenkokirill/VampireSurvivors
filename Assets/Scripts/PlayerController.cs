@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class PlayerController : MonoBehaviour
 {
@@ -77,8 +78,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void RessurectPlayer()
+    public void RessurectPlayer()
     {
-        return;
+        gameObject.SetActive(true);
+        gameObject.GetComponent<HealthSystem>().FullHeal();
     }
 }

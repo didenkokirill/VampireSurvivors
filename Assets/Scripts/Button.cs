@@ -29,6 +29,11 @@ public class Button : MonoBehaviour
 
     public void Restart()
     {
+        MenuManager.Instance.RemoveFromPause();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void SecondLife()
+    {
+        MenuManager.Instance.CloseGameOverMenu();
     }
 }

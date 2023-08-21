@@ -20,15 +20,15 @@ public class Shooting : MonoBehaviour
     [SerializeField] private float splashDamage = 1;
     [SerializeField] private float splashRange = 0;
 
-    private void Start()
+    private void OnEnable()
     {
-        StartCoroutine(Attack());
+        StartCoroutine(StartAttack());
     }
 
-    private IEnumerator Attack()
+    private IEnumerator StartAttack()
     {
         yield return new WaitForSeconds(attackDelay);
-
+        Debug.Log(Time.deltaTime);
         GameObject nearestTarget = findNearest.nearest;
 
         if (nearestTarget == null)
@@ -54,7 +54,7 @@ public class Shooting : MonoBehaviour
                 break;
         }
         
-        StartCoroutine(Attack());
+        StartCoroutine(StartAttack());
     }
 
     private void Pistol()

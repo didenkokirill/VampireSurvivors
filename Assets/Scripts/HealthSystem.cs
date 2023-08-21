@@ -24,7 +24,7 @@ public class HealthSystem : MonoBehaviour
         render = GetComponent<SpriteRenderer>();
         health = maxHealt;
     }
-
+    
     public float GetCurrentHealth()
     {
         return health;
@@ -54,6 +54,10 @@ public class HealthSystem : MonoBehaviour
             health = maxHealt;
         }
     }
+    public void FullHeal()
+    {
+        health = maxHealt;
+    }
 
     private void Die()
     {       
@@ -70,6 +74,7 @@ public class HealthSystem : MonoBehaviour
                 break;
         }
     }
+
     public void ChangeMaxHealth(int amount)
     {
         maxHealt += amount;

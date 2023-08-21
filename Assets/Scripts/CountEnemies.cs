@@ -7,22 +7,30 @@ public class CountEnemies : MonoBehaviour
 
     private void Awake() => Instance = this;
 
-    [SerializeField] private List<GameObject> enemyList = new();
+    [SerializeField] private List<GameObject> enemiesList = new();
 
     public void Add(GameObject enemy)
     {
-        enemyList.Add(enemy);
+        enemiesList.Add(enemy);
     }
     public void Remove(GameObject enemy)
     {
-        enemyList.Remove(enemy);
+        enemiesList.Remove(enemy);
     }
     public int Count()
     {
-        return enemyList.Count;
+        return enemiesList.Count;
     }
     public List<GameObject> List()
     {
-        return enemyList;
+        return enemiesList;
+    }
+    public void ResetEnemy()
+    {
+        foreach (GameObject enemy in enemiesList)
+        {
+            Destroy(enemy);
+        }
+        enemiesList.Clear();
     }
 }

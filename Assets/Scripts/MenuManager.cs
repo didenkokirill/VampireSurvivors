@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -6,33 +7,20 @@ public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance;
 
-    [SerializeField] private GameObject updateMenu, gameOverMenu;
+    [SerializeField] private GameObject updateMenu, gameOverMenu, secondLifeButton;
     [SerializeField] private float timeToResume;
     [SerializeField] private TMP_Text timerResume;
+    private bool giveSecondLife = true;
 
     private void Awake() => Instance = this;
 
-    private bool onPause;
-
-    private void Update()
-    {
-        if (onPause)
-        {
-            Time.timeScale = 0;
-        }
-        else if (!onPause)
-        {
-            Time.timeScale = 1.0f;
-        }
-    }
-
     public void PutOnPause()
     {
-        onPause = true;
+        Time.timeScale = 0;
     }
     public void RemoveFromPause()
     {
-        StartCoroutine(CountDown(timeToResume));
+        Time.timeScale = 1.0f;
     }
 
     public void OpenUpdateMenu()
@@ -43,18 +31,36 @@ public class MenuManager : MonoBehaviour
     public void CloseUpdateMenu()
     {
         updateMenu.SetActive(false);
-        RemoveFromPause();
+        StartCoroutine(CountDown(timeToResume));
     }
 
     public void OpenGameOverMenu()
     {
         ScoreManager.Instance.UpdateScoresTexts();
         gameOverMenu.SetActive(true);
+        if(giveSecondLife == false)
+        {
+            secondLifeButton.SetActive(false);
+        }
+
         PutOnPause();
     }
-
-    private IEnumerator CountDown(float time) // check code stile
+    public void CloseGameOverMenu()
     {
+        gameOverMenu.SetActive(false);
+        CountEnemies.Instance.ResetEnemy();
+        PlayerController.Instance.RessurectPlayer();
+
+        giveSecondLife = false;
+        GameManager.Instance.ShowAdForNewLife();
+        ScoreManager.Instance.ChangeBestScore();
+
+        StartCoroutine(CountDown(timeToResume));
+    }
+
+    private IEnumerator CountDown(float time = 3) // check code stile
+    {
+        timerResume.enabled = true;
         while (true)
         {
             timerResume.text = Mathf.Round(time).ToString();
@@ -63,9 +69,9 @@ public class MenuManager : MonoBehaviour
 
             if (time <= 0)
             {
-                timerResume.enabled = false;
-                onPause = false;
-                yield return null;
+                timerResume.enabled = false;;
+                RemoveFromPause();
+                yield break;
             }
         }
     }
