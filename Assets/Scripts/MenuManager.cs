@@ -7,7 +7,7 @@ public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance;
 
-    [SerializeField] private GameObject updateMenu, gameOverMenu, secondLifeButton;
+    [SerializeField] private GameObject onGamePlay, updateMenu, gameOverMenu, shopMenu, secondLifeButton;
     [SerializeField] private float timeToResume;
     [SerializeField] private TMP_Text timerResume;
     private bool giveSecondLife = true;
@@ -56,6 +56,12 @@ public class MenuManager : MonoBehaviour
         ScoreManager.Instance.ChangeBestScore();
 
         StartCoroutine(CountDown(timeToResume));
+    }
+
+    public void OpenShopMenu()
+    {
+        onGamePlay.SetActive(false);
+        shopMenu.SetActive(true);
     }
 
     private IEnumerator CountDown(float time = 3) // check code stile

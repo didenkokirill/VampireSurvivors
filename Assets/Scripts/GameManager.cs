@@ -65,28 +65,28 @@ public class GameManager : MonoBehaviour
         ShowRewardedAdv();
     }
 
-    public void GiveSecondLife()
-    {
-        // remove secondLLife button
-        b_secondLife.SetActive(false);
+    //public void GiveSecondLife()
+    //{
+    //    // remove secondLLife button
+    //    b_secondLife.SetActive(false);
 
-        // kill all enemies in radius
-        Instantiate(enemyKiller, MovePlayer.Instance.transform.position, Quaternion.identity);
+    //    // kill all enemies in radius
+    //    Instantiate(enemyKiller, MovePlayer.Instance.transform.position, Quaternion.identity);
 
-        // respawn player
-        MovePlayer.Instance.RessurectPlayer();
+    //    // respawn player
+    //    MovePlayer.Instance.RessurectPlayer();
 
-        gameOverScreen.SetActive(false);
+    //    gameOverScreen.SetActive(false);
 
-        foreach (var objectToHide in objectsToHideOnGameOver)
-        {
-            objectToHide.SetActive(true);
-        }
+    //    foreach (var objectToHide in objectsToHideOnGameOver)
+    //    {
+    //        objectToHide.SetActive(true);
+    //    }
 
-        // resume game on button click
-        /*gameOverScreen.SetActive(false);
-        continueScreen.SetActive(true);*/
-    }
+    //    // resume game on button click
+    //    /*gameOverScreen.SetActive(false);
+    //    continueScreen.SetActive(true);*/
+    //}
 
     public void CheckForShowingAd(int currentLevel)
     {

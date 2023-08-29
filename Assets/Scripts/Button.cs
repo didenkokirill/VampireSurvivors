@@ -36,4 +36,8 @@ public class Button : MonoBehaviour
     {
         MenuManager.Instance.CloseGameOverMenu();
     }
+    public void GoShop()
+    {
+        MenuManager.Instance.OpenShopMenu();
+    }
 }

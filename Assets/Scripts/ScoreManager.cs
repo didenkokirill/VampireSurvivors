@@ -17,6 +17,9 @@ public class ScoreManager : MonoBehaviour
     public PlayerInfo PlayerInfo;
 
     public static ScoreManager Instance;
+
+    
+
     [SerializeField] private int score;
     [SerializeField] private int bestScore;
     [SerializeField] private TMP_Text scoreText, bestScoreText;
