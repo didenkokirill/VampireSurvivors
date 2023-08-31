@@ -36,7 +36,7 @@ public class MenuManager : MonoBehaviour
 
     public void OpenGameOverMenu()
     {
-        ScoreManager.Instance.UpdateScoresTexts();
+        SaveManager.Instance.UpdateScoresTexts();
         gameOverMenu.SetActive(true);
         if(giveSecondLife == false)
         {
@@ -53,7 +53,7 @@ public class MenuManager : MonoBehaviour
 
         giveSecondLife = false;
         GameManager.Instance.ShowAdForNewLife();
-        ScoreManager.Instance.ChangeBestScore();
+        SaveManager.Instance.SaveBestScore();
 
         StartCoroutine(CountDown(timeToResume));
     }

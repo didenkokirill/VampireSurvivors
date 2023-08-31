@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Button : MonoBehaviour
+public class ForButton : MonoBehaviour
 {
     [SerializeField] private GameObject pistol, shotgun, rocketLauncer;
 
@@ -39,5 +39,17 @@ public class Button : MonoBehaviour
     public void GoShop()
     {
         MenuManager.Instance.OpenShopMenu();
+    }
+
+    [SerializeField] private ShopSlot shopSlot;
+
+    public void Buy()
+    {
+        shopSlot.ChangeButtonTo(shopSlot.GiveButtonForSell());
+    }
+    public void Sell()
+    {
+        shopSlot.ChangeButtonTo(shopSlot.GiveButtonForEquip());
+        SaveManager.Instance.PlayerInfo.slot1 = shopSlot.GiveSlotNumber();
     }
 }

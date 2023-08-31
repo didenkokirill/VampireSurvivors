@@ -46,7 +46,7 @@ public class ExperienceManager : MonoBehaviour
 
         currentExp += amount;
         experenceSlider.value += amount;
-        ScoreManager.Instance.AddScore(amount);
+        SaveManager.Instance.AddScore(amount);
         experenceText.text = $"Exp: {currentExp}";
     }
 

@@ -28,7 +28,6 @@ public class Shooting : MonoBehaviour
     private IEnumerator StartAttack()
     {
         yield return new WaitForSeconds(attackDelay);
-        Debug.Log(Time.deltaTime);
         GameObject nearestTarget = findNearest.nearest;
 
         if (nearestTarget == null)
