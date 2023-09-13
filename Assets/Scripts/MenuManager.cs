@@ -12,7 +12,11 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private TMP_Text timerResume;
     private bool giveSecondLife = true;
 
-    private void Awake() => Instance = this;
+    private void Awake()
+    {
+        Instance = this;
+        giveSecondLife = true;
+    }
 
     public void PutOnPause()
     {
@@ -38,11 +42,9 @@ public class MenuManager : MonoBehaviour
     {
         SaveManager.Instance.UpdateScoresTexts();
         gameOverMenu.SetActive(true);
-        if(giveSecondLife == false)
-        {
-            secondLifeButton.SetActive(false);
-        }
-
+       
+        secondLifeButton.SetActive(giveSecondLife);
+        
         PutOnPause();
     }
     public void CloseGameOverMenu()
@@ -51,11 +53,14 @@ public class MenuManager : MonoBehaviour
         CountEnemies.Instance.ResetEnemy();
         PlayerController.Instance.RessurectPlayer();
 
-        giveSecondLife = false;
-        GameManager.Instance.ShowAdForNewLife();
         SaveManager.Instance.SaveBestScore();
 
         StartCoroutine(CountDown(timeToResume));
+    }
+    public void GiveSecondLive()
+    {
+        giveSecondLife = false;
+        GameManager.Instance.ShowAdForNewLife();
     }
 
     public void OpenShopMenu()
@@ -64,7 +69,7 @@ public class MenuManager : MonoBehaviour
         shopMenu.SetActive(true);
     }
 
-    private IEnumerator CountDown(float time = 3) // check code stile
+    public IEnumerator CountDown(float time = 3) // check code stile
     {
         timerResume.enabled = true;
         while (true)

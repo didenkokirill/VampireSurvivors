@@ -35,6 +35,7 @@ public class ForButton : MonoBehaviour
     public void SecondLife()
     {
         MenuManager.Instance.CloseGameOverMenu();
+        MenuManager.Instance.GiveSecondLive();
     }
     public void GoShop()
     {

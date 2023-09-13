@@ -236,7 +236,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Exp: 1000000000'
+  m_text: 'Exp: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cb59d7f63dc78bf4e891efe3998f96c0, type: 2}
   m_sharedMaterial: {fileID: 1316395403629780034, guid: cb59d7f63dc78bf4e891efe3998f96c0, type: 2}
@@ -658,9 +658,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
-  m_Value: 0.088
+  m_MaxValue: 10
+  m_WholeNumbers: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
