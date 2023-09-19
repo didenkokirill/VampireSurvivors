@@ -4,33 +4,38 @@ using UnityEngine.UI;
 public class ShopSlot : MonoBehaviour
 {
     [SerializeField] private int number;
-    [SerializeField] private Button buttonForBuy, buttonForSell, buttonForEquip;
+    [SerializeField] private Image image;
+    [SerializeField] private Button buttonForBuy, buttonForEquip, buttonForEquiped;
 
     public int GiveSlotNumber()
     {
         return number;
     }
 
+    public Image GetImage()
+    {
+        return image;
+    }
+
     public Button GiveButtonForBuy()
     {
         return buttonForBuy;
-    }
-    public Button GiveButtonForSell()
-    {
-        return buttonForSell;
     }
     public Button GiveButtonForEquip()
     {
         return buttonForEquip;
     }
+    public Button GiveButtonForEquiped()
+    {
+        return buttonForEquiped;
+    }
 
     public void ChangeButtonTo(Button activeButton)
     {
-        Debug.Log("changebutton");
-        buttonForBuy.enabled = false;
-        buttonForSell.enabled = false;
-        buttonForEquip.enabled = false;
+        buttonForBuy.gameObject.SetActive(false);
+        buttonForEquip.gameObject.SetActive(false);
+        buttonForEquiped.gameObject.SetActive(false); 
 
-        activeButton.enabled = true;
+        activeButton.gameObject.SetActive(true);
     }
 }

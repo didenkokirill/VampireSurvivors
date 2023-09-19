@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -54,19 +53,25 @@ public class MenuManager : MonoBehaviour
         PlayerController.Instance.RessurectPlayer();
 
         SaveManager.Instance.SaveBestScore();
-
-        StartCoroutine(CountDown(timeToResume));
     }
     public void GiveSecondLive()
     {
         giveSecondLife = false;
-        GameManager.Instance.ShowAdForNewLife();
+        //GameManager.Instance.ShowAdForNewLife();
+
+        StartCoroutine(CountDown());
     }
 
     public void OpenShopMenu()
     {
         onGamePlay.SetActive(false);
         shopMenu.SetActive(true);
+    }
+    public void CloseShopMenu()
+    {
+        onGamePlay.SetActive(true);
+        shopMenu.SetActive(false);
+        StartCoroutine(CountDown());
     }
 
     public IEnumerator CountDown(float time = 3) // check code stile

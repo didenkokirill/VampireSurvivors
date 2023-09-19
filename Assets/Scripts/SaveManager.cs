@@ -1,15 +1,14 @@
 using System;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using TMPro;
-using Unity.Mathematics;
 using UnityEngine;
 
 [System.Serializable]
 public class PlayerInfo
 {
     public int bestScore;
-    public int slot1, slot2;
+    public int equiped;
+    public int[] bought;
 }
 
 public class SaveManager : MonoBehaviour
@@ -21,6 +20,8 @@ public class SaveManager : MonoBehaviour
     [DllImport("__Internal")] private static extern void SaveExtern(string date);
     [DllImport("__Internal")] private static extern void LoadExtern();
 
+    [SerializeField] private ShopKeeper shopKeeper;
+
     [SerializeField] private string dateToUnlock;
     [SerializeField] private int score, bestScore;
     [SerializeField] private TMP_Text scoreText, bestScoreText;
@@ -31,6 +32,12 @@ public class SaveManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        if(PlayerInfo.bought.Length == 0)
+        {
+            int[] ints = new int[20];
+            PlayerInfo.bought = ints;
+        }      
     }
 
     private void Start()
@@ -74,9 +81,24 @@ public class SaveManager : MonoBehaviour
         return PlayerInfo.bestScore;
     }
 
-    public void SaveSkinCondition(int num)
+    public void AddBoughtSkin(int number)
     {
-        
+        PlayerInfo.bought[number] = 1;
+        Save();
+    }
+    public int[] GetBought()
+    {
+        return PlayerInfo.bought;
+    }
+
+    public int GetEquiped()
+    {
+        return PlayerInfo.equiped;
+    }
+    public void SetEquiped(int equiped)
+    {
+        PlayerInfo.equiped = equiped;
+        Save();
     }
 
     public void ClearData()
@@ -85,7 +107,7 @@ public class SaveManager : MonoBehaviour
         Save();
     }
 
-    private void Save()
+    public void Save()
     {
         string jsonString = JsonUtility.ToJson(PlayerInfo);
 #if !UNITY_EDITOR && UNITY_WEBGL

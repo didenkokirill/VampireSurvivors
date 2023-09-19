@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance;
 
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
     [SerializeField] private float speed;
     [SerializeField] private float rotationSensitivity;
 
@@ -82,5 +84,10 @@ public class PlayerController : MonoBehaviour
     {
         gameObject.SetActive(true);
         gameObject.GetComponent<HealthSystem>().FullHeal();
+    }
+
+    public void SetSprite(Sprite newSprite)
+    {
+        spriteRenderer.sprite = newSprite;
     }
 }

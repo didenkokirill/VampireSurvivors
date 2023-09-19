@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -40,17 +41,27 @@ public class ForButton : MonoBehaviour
     public void GoShop()
     {
         MenuManager.Instance.OpenShopMenu();
+        MenuManager.Instance.CloseGameOverMenu();
+    }
+    public void CloseShop()
+    {
+        Restart();
     }
 
     [SerializeField] private ShopSlot shopSlot;
-
+    [SerializeField] private TMP_Text equipButtonText;
+ 
     public void Buy()
     {
-        shopSlot.ChangeButtonTo(shopSlot.GiveButtonForSell());
-    }
-    public void Sell()
-    {
         shopSlot.ChangeButtonTo(shopSlot.GiveButtonForEquip());
-        SaveManager.Instance.PlayerInfo.slot1 = shopSlot.GiveSlotNumber();
+        SaveManager.Instance.AddBoughtSkin(shopSlot.GiveSlotNumber());
+    }
+    public void Equip()
+    {
+        shopSlot.ChangeButtonTo(shopSlot.GiveButtonForEquiped());
+
+        int previusEquiped = SaveManager.Instance.PlayerInfo.equiped;
+        SaveManager.Instance.PlayerInfo.equiped = shopSlot.GiveSlotNumber();
+        ShopKeeper.Instance.ChangeEquiped(shopSlot.GiveSlotNumber(), previusEquiped);
     }
 }
